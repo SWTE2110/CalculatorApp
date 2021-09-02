@@ -31,8 +31,15 @@ namespace CalculatorApp
 
         public double Divide(double dividend, double divisor)
         {
-            if (divisor == 0) throw new ArgumentException("divide by zero");
-            else return dividend / divisor;
+            try
+            {
+                return dividend / divisor;
+            }
+            catch(DivideByZeroException)
+            {
+                Console.WriteLine("Divided by 0");
+                return 0;
+            }
         }
 
     }
