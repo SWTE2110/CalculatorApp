@@ -29,6 +29,11 @@ namespace CalculatorApp
             return Math.Pow(x, exp);
         }
 
+        public double Divide(double dividend, double divisor)
+        {
+            if (divisor == 0) throw new ArgumentException("divide by zero");
+            else return dividend / divisor;
+        }
 
     }
 }
