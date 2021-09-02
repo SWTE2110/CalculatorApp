@@ -23,7 +23,7 @@ namespace CalculatorApp.Test.Unit
             uut.Add(a, b);
 
             //Assert
-            Assert.That(uut.Add(a,b), Is.EqualTo(5));
+            Assert.That(uut.Add(a, b), Is.EqualTo(5));
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace CalculatorApp.Test.Unit
         }
 
         //Optional TestCase exercise used here
-        [TestCase(2,3,8)]
+        [TestCase(2, 3, 8)]
         [TestCase(5, 3, 125)]
         [TestCase(3, 2, 9)]
         public void CalculatorTest_PowerFunktion_ExpectEight(double a, double b, double res)
@@ -62,5 +62,24 @@ namespace CalculatorApp.Test.Unit
             //Assert
             Assert.That(uut.Power(a, b), Is.EqualTo(res));
         }
-    }
+
+        [TestCase(3, 2, 1.5)]
+        [TestCase(10, -5, -2)]
+        [TestCase(4, 2, 2)]
+        [TestCase(4, 0.5, 8)]
+        
+        public void CalculatorTest_Divide(double a, double b, double res)
+        {
+
+            Assert.That(uut.Divide(a, b), Is.EqualTo(res));
+        }
+
+        [Test]
+        public void CulculatorTest_Divide_ByZeroError()
+        {
+            Assert.Throws<ArgumentException>(() => uut.Divide(7, 0));
+            
+        }
+
+}
 }

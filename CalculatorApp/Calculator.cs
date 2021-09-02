@@ -9,6 +9,8 @@ namespace CalculatorApp
         public Calculator()
         {}
 
+
+
         public double Add(double a, double b)
         {
             return a + b;
@@ -29,17 +31,11 @@ namespace CalculatorApp
             return Math.Pow(x, exp);
         }
 
-        public double Divide(double a, double b)
+        public double Divide(double dividend, double divisor)
         {
-            try
-            {
-                return a / b;
-            }
-            catch(DivideByZeroException) //Det virker ikke, den siger resultatet altid er 8, hvis vi dividerer med 0...
-            {
-                Console.WriteLine("Divided by 0");
-                return 0;
-            }
+
+            if (divisor == 0) throw new ArgumentException("Division med 0");
+            else return dividend / divisor;
         }
 
     }
