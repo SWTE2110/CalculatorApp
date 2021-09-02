@@ -29,13 +29,13 @@ namespace CalculatorApp
             return Math.Pow(x, exp);
         }
 
-        public double Divide(double dividend, double divisor)
+        public double Divide(double a, double b)
         {
             try
             {
-                return dividend / divisor;
+                return a / b;
             }
-            catch(DivideByZeroException)
+            catch(DivideByZeroException) //Det virker ikke, den siger resultatet altid er 8, hvis vi dividerer med 0...
             {
                 Console.WriteLine("Divided by 0");
                 return 0;

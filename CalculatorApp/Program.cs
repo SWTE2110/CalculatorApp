@@ -8,14 +8,15 @@ namespace CalculatorApp
         {
             Calculator cal = new Calculator();
 
-            double a = 2;
-            double b = 3;
+            double a = 5;
+            double b = 0;
 
             Console.WriteLine("Givet de to tal {0} og {1} kan vi se:", a, b);
             Console.WriteLine("Resultatet af " + a + " + " + b + " = {0}", cal.Add(a, b));
             Console.WriteLine("Resultatet af " + a + " - " + b + " = " + cal.Subtract(a, b));
             Console.WriteLine("Resultatet af " + a + " * " + b + " = " + cal.Multiply(a, b));
             Console.WriteLine("Resultatet af " + a + " ^ " + b + " = " + cal.Power(a, b));
+            Console.WriteLine("Resultatet af " + a + " / " + b + " = " + cal.Divide(a, b));
             Console.Write("\n");
 
             if (cal.Add(a, b) == 5)
