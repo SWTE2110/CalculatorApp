@@ -89,6 +89,16 @@ namespace CalculatorApp.Test.Unit
             Assert.That(uut.Accumulator, Is.EqualTo(0));
         }
 
+        [Test]
+        public void CalculatorTest_Accumulator_Clear()
+        {
+            uut.Add(10);
+
+            Assert.That(uut.Accumulator, Is.EqualTo(10));
+            uut.Clear();
+            Assert.That(uut.Accumulator, Is.EqualTo(0));
+        }
+
         [TestCase(2,2)]
         [TestCase(0,0)]
         [TestCase(-2,-2)]
@@ -112,7 +122,104 @@ namespace CalculatorApp.Test.Unit
 
         }
 
-        
+        [TestCase(2, -2)]
+        [TestCase(0, 0)]
+        [TestCase(-2, 2)]
+        [TestCase(1.5, -1.5)]
+        public void CalculatorTest_Accumulator_Subtract_Single(double a, double res)
+        {
+            uut.Subtract(a);
+            Assert.That(uut.Accumulator, Is.EqualTo(res));
+        }
 
-}
+
+        [TestCase(2, 3, 4, -9)]
+        [TestCase(0, -2, 2, 0)]
+        [TestCase(-2.5, -3.6, 7.9, -1.8)]
+        public void CalculatorTest_Accumulator_Subtract_Multiple(double a, double b, double c, double res)
+        {
+            uut.Subtract(a);
+            uut.Subtract(b);
+            uut.Subtract(c);
+            Assert.That(uut.Accumulator, Is.EqualTo(res).Within(0.000001));
+
+        }
+        [TestCase(5,10)]
+        [TestCase(0,0)]
+        [TestCase(-2,-4)]
+        [TestCase(1.4,2.8)]
+        public void CalculatorTest_Accumulator_Multiply_Single(double a, double res)
+        {
+            uut.Add(2);
+            uut.Multiply(a);
+
+            Assert.That(uut.Accumulator, Is.EqualTo(res));
+        }
+
+        [TestCase(5, 2, -2, -40)]
+        [TestCase(0, 2, 5, 0)]
+        [TestCase(5.2, 8.1, 0.75, 63.18)]
+        public void CalculatorTest_Accumulator_Multiply_Multiple(double a, double b, double c, double res)
+        {
+            uut.Add(2);
+            uut.Multiply(a);
+            uut.Multiply(b);
+            uut.Multiply(c);
+
+            Assert.That(uut.Accumulator, Is.EqualTo(res).Within(0.000001));
+        }
+
+        [TestCase(4, 2.5)]
+        [TestCase(1, 10)]
+        [TestCase(-2, -5)]
+        [TestCase(2.5, 4)]
+        public void CalculatorTest_Accumulator_Divide_Single(double a, double res)
+        {
+            uut.Add(10);
+            uut.Divide(a);
+            Assert.That(uut.Accumulator, Is.EqualTo(res));
+        }
+
+        [Test]
+        public void CalculatorTest_Accumulator_Divide_Exception_Zero()
+        {
+            uut.Add(10);
+           
+            Assert.Throws<ArgumentException>(() => uut.Divide(0));
+        }
+
+        [TestCase(1, -1, 0.5, -20)]
+        [TestCase(0.5,0.5,0.5,80)]
+        [TestCase(10,10,10,0.01)]
+        public void CalculatorTest_Accumulator_Divide_Multiple(double a, double b, double c, double res)
+        {
+            uut.Add(10);
+            uut.Divide(a);
+            uut.Divide(b);
+            uut.Divide(c);
+            Assert.That(uut.Accumulator, Is.EqualTo(res).Within(0.000001));
+
+        }
+
+        [TestCase(0, 1)]
+        [TestCase(-1, 0.5)]
+        [TestCase(0.5, 1.41421356237)]
+        public void CalculatorTest_Accumulator_Power_Single(double a, double res)
+        {
+            uut.Add(2);
+            uut.Power(a);
+            Assert.That(uut.Accumulator, Is.EqualTo(res).Within(0.000001));
+        }
+
+        public void CalculatorTest_Accumulator_Power_Multiple(double a, double b, double c, double res)
+        {
+
+            uut.Add(2);
+            uut.Power(a);
+            uut.Power(b);
+            uut.Power(c);
+            Assert.That(uut.Accumulator, Is.EqualTo(res).Within(0.000001));
+        }
+    }
+
 }
