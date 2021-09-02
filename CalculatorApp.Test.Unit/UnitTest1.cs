@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using NUnit.Framework;
 
 namespace CalculatorApp.Test.Unit
@@ -12,6 +13,7 @@ namespace CalculatorApp.Test.Unit
         {
             //Arrange
             uut = new Calculator();
+            uut.Clear();
         }
 
         [Test]
@@ -75,11 +77,42 @@ namespace CalculatorApp.Test.Unit
         }
 
         [Test]
-        public void CulculatorTest_Divide_ByZeroError()
+        public void CalculatorTest_Divide_ByZeroError()
         {
             Assert.Throws<ArgumentException>(() => uut.Divide(7, 0));
             
         }
+
+        [Test]
+        public void CalculatorTest_Accumulator_Init()
+        {
+            Assert.That(uut.Accumulator, Is.EqualTo(0));
+        }
+
+        [TestCase(2,2)]
+        [TestCase(0,0)]
+        [TestCase(-2,-2)]
+        [TestCase(1.5,1.5)]
+        public void CalculatorTest_Accumulator_Add_Single(double a, double res)
+        {
+            uut.Add(a);
+            Assert.That(uut.Accumulator, Is.EqualTo(res));
+        }
+
+
+        [TestCase(2,3,4,9)]
+        [TestCase(0,-2,2,0)]
+        [TestCase(-2.5,-3.6,7.9, 1.8)]
+        public void CalculatorTest_Accumulator_Add_Multiple(double a, double b, double c, double res)
+        {
+            uut.Add(a);
+            uut.Add(b);
+            uut.Add(c);
+            Assert.That(uut.Accumulator, Is.EqualTo(res).Within(0.000001));
+
+        }
+
+        
 
 }
 }
