@@ -25,7 +25,7 @@ namespace CalculatorApp.Test.Unit
             uut.Add(a, b);
 
             //Assert
-            Assert.That(uut.Add(a, b), Is.EqualTo(5));
+            Assert.That(uut.Accumulator, Is.EqualTo(5));
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace CalculatorApp.Test.Unit
             uut.Subtract(a, b);
 
             //Assert
-            Assert.That(uut.Subtract(a, b), Is.EqualTo(-1));
+            Assert.That(uut.Accumulator, Is.EqualTo(-1));
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace CalculatorApp.Test.Unit
             uut.Multiply(a, b);
 
             //Assert
-            Assert.That(uut.Multiply(a, b), Is.EqualTo(6));
+            Assert.That(uut.Accumulator, Is.EqualTo(6));
         }
 
         //Optional TestCase exercise used here
@@ -62,7 +62,7 @@ namespace CalculatorApp.Test.Unit
             uut.Power(a, b);
 
             //Assert
-            Assert.That(uut.Power(a, b), Is.EqualTo(res));
+            Assert.That(uut.Accumulator, Is.EqualTo(res));
         }
 
         [TestCase(3, 2, 1.5)]
@@ -72,8 +72,8 @@ namespace CalculatorApp.Test.Unit
         
         public void CalculatorTest_Divide(double a, double b, double res)
         {
-
-            Assert.That(uut.Divide(a, b), Is.EqualTo(res));
+            uut.Divide(a, b);
+            Assert.That(uut.Accumulator, Is.EqualTo(res));
         }
 
         [Test]
@@ -210,7 +210,7 @@ namespace CalculatorApp.Test.Unit
             uut.Power(a);
             Assert.That(uut.Accumulator, Is.EqualTo(res).Within(0.000001));
         }
-
+        [TestCase(2,0.5,4,16)]
         public void CalculatorTest_Accumulator_Power_Multiple(double a, double b, double c, double res)
         {
 
@@ -219,6 +219,12 @@ namespace CalculatorApp.Test.Unit
             uut.Power(b);
             uut.Power(c);
             Assert.That(uut.Accumulator, Is.EqualTo(res).Within(0.000001));
+        }
+
+        [Test]
+        public void CalculatorTest_Power_Imaginary()
+        {
+            Assert.Throws<ArgumentException>(() => uut.Power(-2, 1.5));
         }
     }
 
