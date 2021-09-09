@@ -79,6 +79,7 @@ namespace CalculatorApp.Test.Unit
         [Test]
         public void CalculatorTest_Divide_ByZeroError()
         {
+            Assert.That(()=>uut.Divide(7,0),Throws.Exception.TypeOf<ArgumentException>());
             Assert.Throws<ArgumentException>(() => uut.Divide(7, 0));
             
         }
