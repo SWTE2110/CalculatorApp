@@ -16,40 +16,44 @@ namespace CalculatorApp.Test.Unit
             uut.Clear();
         }
 
-        [Test]
-        public void CalculatorTest_AddFunktion_ExpextFive()
+        [TestCase(1,3,4)]
+        [TestCase(-2, 2, 0)]
+        [TestCase(1.5, 3.2, 4.7)]
+        public void CalculatorTest_AddFunktion_ExpextFive(double a, double b, double res)
         {
             //Act
-            double a = 2;
-            double b = 3;
+            
             uut.Add(a, b);
 
             //Assert
-            Assert.That(uut.Accumulator, Is.EqualTo(5));
+            Assert.That(uut.Accumulator, Is.EqualTo(res));
         }
 
-        [Test]
-        public void CalculatorTest_SubtractFunktion_ExpectNegativeOne()
+        [TestCase(2,1,1)]
+        [TestCase(2, -4, 6)]
+        [TestCase(10.5, 14.7, -4.2)]
+        public void CalculatorTest_SubtractFunktion_ExpectNegativeOne(double a, double b, double res)
         {
             //Act
-            double a = 2;
-            double b = 3;
+           
             uut.Subtract(a, b);
 
             //Assert
-            Assert.That(uut.Accumulator, Is.EqualTo(-1));
+            Assert.That(uut.Accumulator, Is.EqualTo(res).Within(0.000001));
         }
 
-        [Test]
-        public void CalculatorTest_MultiplyFunktion_ExpectSix()
+        [TestCase(5,1,5)]
+        [TestCase(5, -1, -5)]
+        [TestCase(6, 0.3, 1.8)]
+        [TestCase(0.1, 0.1, 0.01)]
+        public void CalculatorTest_MultiplyFunktion_ExpectSix(double a, double b, double res)
         {
             //Act
-            double a = 2;
-            double b = 3;
+            
             uut.Multiply(a, b);
 
             //Assert
-            Assert.That(uut.Accumulator, Is.EqualTo(6));
+            Assert.That(uut.Accumulator, Is.EqualTo(res).Within(0.000001));
         }
 
         //Optional TestCase exercise used here
@@ -79,9 +83,15 @@ namespace CalculatorApp.Test.Unit
         [Test]
         public void CalculatorTest_Divide_ByZeroError()
         {
-            Assert.That(()=>uut.Divide(7,0),Throws.Exception.TypeOf<ArgumentException>());
+            
             Assert.Throws<ArgumentException>(() => uut.Divide(7, 0));
             
+        }
+
+        [Test]
+        public void CalculatorTest_Divide_ByZeroError_Alternative()
+        {
+            Assert.That(() => uut.Divide(7, 0), Throws.Exception.TypeOf<ArgumentException>());
         }
 
         [Test]
@@ -90,6 +100,7 @@ namespace CalculatorApp.Test.Unit
             Assert.That(uut.Accumulator, Is.EqualTo(0));
         }
 
+      
         [Test]
         public void CalculatorTest_Accumulator_Clear()
         {
